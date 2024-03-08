@@ -267,17 +267,15 @@ export default class VideoRecorder extends Component {
           video: true
         }
 
-        const currentConstraints = merge(
-          {
-            video: {
-              deviceId: {
-                exact: currentDeviceId
-              }
-            }
-          },
-          this.props.constraints
-        )
-
+  const currentConstraints = {
+    video: {
+      width: { ideal: 1280 },
+      height: { ideal: 720 },
+      frameRate: { ideal: 30 },
+      deviceId: { exact: currentDeviceId }
+    },
+    audio: false,
+  };
         navigator.mediaDevices
           .getUserMedia(currentConstraints)
           .catch((err) => {
